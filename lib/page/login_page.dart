@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_sing_in/controllers/user_controller.dart';
+import 'package:google_sing_in/page/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,6 +13,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            SvgPicture.asset('lib/assets/images/login.svg'),
+            SvgPicture.asset('assets/images/login.svg'),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,12 +36,65 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Expanded(
                         child: ElevatedButton.icon(
-                          onPressed: () {
-                            if (kDebugMode) {
-                              print('login google');
-                            }
-                          },
-                          label: const Text('Logar com Google'),
+                          onPressed: _isLoading
+                              ? null
+                              : () async {
+                                  setState(() {
+                                    _isLoading = true; // Start loading
+                                  });
+
+                                  try {
+                                    final user =
+                                        await UserController.loginWithGoogle();
+
+                                    if (user != null && context.mounted) {
+                                      Navigator.of(context)
+                                          .pushReplacement(MaterialPageRoute(
+                                        builder: (context) => const HomePage(),
+                                      ));
+                                    }
+                                  } on FirebaseAuthException catch (error) {
+                                    if (kDebugMode) {
+                                      print(error.message);
+                                    }
+                                    if (context.mounted) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(error.message ??
+                                              'Erro não esperado'),
+                                        ),
+                                      );
+                                    }
+                                  } catch (error) {
+                                    if (kDebugMode) {
+                                      print(error);
+                                    }
+                                    if (context.mounted) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(error.toString()),
+                                        ),
+                                      );
+                                    }
+                                  } finally {
+                                    setState(() {
+                                      _isLoading = false; // Stop loading
+                                    });
+                                  }
+                                },
+                          label: _isLoading
+                              ? const SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white),
+                                  ),
+                                )
+                              : const Text('Logar com Google'),
                           icon: const Icon(
                             Icons.g_mobiledata,
                             size: 35,

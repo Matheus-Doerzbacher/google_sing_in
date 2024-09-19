@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sing_in/controllers/user_controller.dart';
+import 'package:google_sing_in/page/home_page.dart';
 import 'package:google_sing_in/page/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 108, 99, 255)),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: UserController.user != null ? const HomePage() : const LoginPage(),
     );
   }
 }
