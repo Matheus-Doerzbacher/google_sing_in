@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(),
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF536DFE)),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 108, 99, 255)),
         useMaterial3: true,
       ),
       home: const LoginPage(),

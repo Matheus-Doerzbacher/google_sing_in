@@ -18,27 +18,44 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: [
             SvgPicture.asset('lib/assets/images/login.svg'),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Faça login com o Google para prosseguir',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                Row(
-                  children: [
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        if (kDebugMode) {
-                          print('login google');
-                        }
-                      },
-                      label: const Text('Fazer Login'),
-                      icon: const Icon(Icons.g_mobiledata),
-                    ),
-                  ],
-                )
-              ],
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Faça login com o Google para prosseguir',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            if (kDebugMode) {
+                              print('login google');
+                            }
+                          },
+                          label: const Text('Logar com Google'),
+                          icon: const Icon(
+                            Icons.g_mobiledata,
+                            size: 35,
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 108, 99, 255),
+                            foregroundColor: Colors.white,
+                            textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ],
         ),
