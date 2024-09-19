@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "677681482223",
+    "project_id": "sing-in-e0a24",
+    "storage_bucket": "sing-in-e0a24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677681482223:android:6cc39b9e91d7fb42c98e1a",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "677681482223-880gnr1h9mu3mb2b362j1of8h9p62981.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwDoVGyN-9Oyf7zs4m8GE4W4AOOJAMQCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "677681482223-880gnr1h9mu3mb2b362j1of8h9p62981.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
